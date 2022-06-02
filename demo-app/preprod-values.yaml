@@ -1,0 +1,30 @@
+image:
+  php:
+    repository: ''
+    pullPolicy: IfNotPresent
+    tag: ""
+  nginx:
+    repository: nginx
+    pullPolicy: IfNotPresent
+    tag: 1.20.2
+
+environments:
+  APP_ENV: prod
+  APP_SECRET: 'secret'
+
+
+resources:
+  phpfpm:
+    limits:
+      cpu: 400m
+      memory: 256Mi
+    requests:
+      cpu: 400m
+      memory: 256Mi
+  nginx:
+    limits:
+      cpu: 50m
+      memory: 64Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi

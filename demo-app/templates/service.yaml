@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-app-cip
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+  namespace: dktrent
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: demo-app-phpfpm
+
+
