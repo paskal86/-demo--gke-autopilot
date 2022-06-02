@@ -16,10 +16,10 @@ spec:
       labels:
         app: demo-app-phpfpm
     spec:
-      volumes:
-      - name: nginx-configmap
-        configMap:
-          name: {{ include "demo-app.fullname" . }}-nginx-configmap
+{{/*      volumes:*/}}
+{{/*      - name: nginx-configmap*/}}
+{{/*        configMap:*/}}
+{{/*          name: {{ include "demo-app.fullname" . }}-nginx-configmap*/}}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.php.repository }}:{{ .Values.image.php.tag | default .Chart.AppVersion }}"
@@ -45,60 +45,60 @@ spec:
                   name: {{ $secret.secretKeyRefName }}
                   key:  {{ $secret.secretKeyRefKey }}
             {{- end }}
-          livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - 'cgi-fcgi -bind -connect 127.0.0.1:9000'
-            initialDelaySeconds: 1
-            periodSeconds: 60
-            successThreshold: 1
-            failureThreshold: 5
-          readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - 'cgi-fcgi -bind -connect 127.0.0.1:9000'
-            initialDelaySeconds: 1
-            periodSeconds: 60
-            successThreshold: 1
-            failureThreshold: 5
-          resources:
-{{ toYaml .Values.resources.phpfpm | nindent 12 }}
-        - name: nginx
-          image: {{ .Values.image.nginx.repository }}:{{ .Values.image.nginx.tag }}
-          imagePullPolicy: {{ .Values.image.nginx.pullPolicy }}
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - mountPath: /etc/nginx/templates/
-              name: nginx-configmap
-          lifecycle:
-            preStop:
-              exec:
-                command:
-                  - sh
-                  - -c
-                  - nginx -s quit; while killall -0 nginx; do sleep 1; done
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 80
-            initialDelaySeconds: 1
-            timeoutSeconds: 5
-            periodSeconds: 60
-            failureThreshold: 3
-            successThreshold: 1
-          livenessProbe:
-            httpGet:
-              path: /ping
-              port: 80
-            initialDelaySeconds: 1
-            timeoutSeconds: 5
-            periodSeconds: 60
-            failureThreshold: 3
-            successThreshold: 1
-          resources:
-{{ toYaml .Values.resources.nginx | nindent 12 }}
+{{/*          livenessProbe:*/}}
+{{/*            exec:*/}}
+{{/*              command:*/}}
+{{/*                - sh*/}}
+{{/*                - -c*/}}
+{{/*                - 'cgi-fcgi -bind -connect 127.0.0.1:9000'*/}}
+{{/*            initialDelaySeconds: 1*/}}
+{{/*            periodSeconds: 60*/}}
+{{/*            successThreshold: 1*/}}
+{{/*            failureThreshold: 5*/}}
+{{/*          readinessProbe:*/}}
+{{/*            exec:*/}}
+{{/*              command:*/}}
+{{/*                - sh*/}}
+{{/*                - -c*/}}
+{{/*                - 'cgi-fcgi -bind -connect 127.0.0.1:9000'*/}}
+{{/*            initialDelaySeconds: 1*/}}
+{{/*            periodSeconds: 60*/}}
+{{/*            successThreshold: 1*/}}
+{{/*            failureThreshold: 5*/}}
+{{/*          resources:*/}}
+{{/*{{ toYaml .Values.resources.phpfpm | nindent 12 }}*/}}
+{{/*        - name: nginx*/}}
+{{/*          image: {{ .Values.image.nginx.repository }}:{{ .Values.image.nginx.tag }}*/}}
+{{/*          imagePullPolicy: {{ .Values.image.nginx.pullPolicy }}*/}}
+{{/*          ports:*/}}
+{{/*            - containerPort: 80*/}}
+{{/*          volumeMounts:*/}}
+{{/*            - mountPath: /etc/nginx/templates/*/}}
+{{/*              name: nginx-configmap*/}}
+{{/*          lifecycle:*/}}
+{{/*            preStop:*/}}
+{{/*              exec:*/}}
+{{/*                command:*/}}
+{{/*                  - sh*/}}
+{{/*                  - -c*/}}
+{{/*                  - nginx -s quit; while killall -0 nginx; do sleep 1; done*/}}
+{{/*          readinessProbe:*/}}
+{{/*            httpGet:*/}}
+{{/*              path: /health*/}}
+{{/*              port: 80*/}}
+{{/*            initialDelaySeconds: 1*/}}
+{{/*            timeoutSeconds: 5*/}}
+{{/*            periodSeconds: 60*/}}
+{{/*            failureThreshold: 3*/}}
+{{/*            successThreshold: 1*/}}
+{{/*          livenessProbe:*/}}
+{{/*            httpGet:*/}}
+{{/*              path: /ping*/}}
+{{/*              port: 80*/}}
+{{/*            initialDelaySeconds: 1*/}}
+{{/*            timeoutSeconds: 5*/}}
+{{/*            periodSeconds: 60*/}}
+{{/*            failureThreshold: 3*/}}
+{{/*            successThreshold: 1*/}}
+{{/*          resources:*/}}
+{{/*{{ toYaml .Values.resources.nginx | nindent 12 }}*/}}

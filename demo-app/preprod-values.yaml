@@ -1,8 +1,8 @@
 image:
   php:
-    repository: ''
+    repository: 'gcr.io/dnmz-dimostration/symfony-cloudrun'
     pullPolicy: IfNotPresent
-    tag: ""
+    tag: 'latest'
   nginx:
     repository: nginx
     pullPolicy: IfNotPresent
