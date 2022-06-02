@@ -1,4 +1,4 @@
-# Default values for demo-app.
+# Default values for demo-app-apache.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -16,7 +16,7 @@ image:
 
 #imagePullSecrets: []
 #nameOverride: ""
-#fullnameOverride: "demo-app"
+#fullnameOverride: "demo-app-apache"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -28,7 +28,7 @@ serviceAccount:
   name: ""
 
 #podAnnotations: {
-#  app: demo-app
+#  app: demo-app-apache
 #}
 
 podSecurityContext: {}
